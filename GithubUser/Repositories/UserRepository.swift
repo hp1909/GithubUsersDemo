@@ -9,24 +9,24 @@ import Foundation
 import Combine
 
 protocol UserRepositoryProtocol {
-    func searchUsers(_ query: String, page: Int) -> AnyPublisher<[User], Never>
+    func searchUsers(_ query: String, page: Int) -> AnyPublisher<SearchResult, UserError>
 }
 
-enum APIError: LocalizedError {
-    case statusCode
-    case dataFormat
+enum UserError: Error {
+    case serverError(error: Error)
 }
 
 class UserRepository: UserRepositoryProtocol {
-    func searchUsers(_ query: String, page: Int) -> AnyPublisher<[User], Never> {
-        let urlString = "https://api.github.com/search/users?q=\(query)&page=\(page)&per_page=30"
+    func searchUsers(_ query: String, page: Int) -> AnyPublisher<SearchResult, UserError> {
+        print("Fedor: Loading page \(page)")
+        let validQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let urlString = "https://api.github.com/search/users?q=\(validQuery)&page=\(page)&per_page=30"
         let url = URL(string: urlString)!
         return URLSession.shared
             .dataTaskPublisher(for: url)
             .map(\.data)
-            .decode(type: SearchUserResult.self, decoder: JSONDecoder())
-            .map(\.items)
-            .replaceError(with: [])
+            .decode(type: SearchResult.self, decoder: JSONDecoder())
+            .mapError { UserError.serverError(error: $0) }
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
     }

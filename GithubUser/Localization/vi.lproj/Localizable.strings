@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  GithubUser
+
+  Created by Phuc Hoang on 9/6/21.
+  
+*/
+"HELLO_WORLD" = "Xin Chào";
+"SEARCH_PLACEHOLDER" = "Tìm những người khác trên Github";
+"SEARCH_VIEW_NAVIGATION_TITLE" = "Github Users";
+"RETRY_LABEL" = "Xin thử lại";
+"WELCOME" = "Chào mừng đến với Github Users";

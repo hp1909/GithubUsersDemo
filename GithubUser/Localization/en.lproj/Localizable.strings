@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  GithubUser
+
+  Created by Phuc Hoang on 9/6/21.
+  
+*/
+"HELLO_WORLD" = "Hello world";
+"SEARCH_PLACEHOLDER" = "find your Github buddies";
+"SEARCH_VIEW_NAVIGATION_TITLE" = "Github Users";
+"RETRY_LABEL" = "Please try again";
+"WELCOME" = "Welcome to GitHub Users";

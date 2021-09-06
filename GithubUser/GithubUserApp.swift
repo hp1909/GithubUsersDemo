@@ -11,7 +11,7 @@ import SwiftUI
 struct GithubUserApp: App {
     var body: some Scene {
         WindowGroup {
-            SearchView()
+            SearchView(viewModel: SearchViewModel(repository: UserRepository()))
         }
     }
 }
